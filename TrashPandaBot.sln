@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31613.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrashPandaBot", "TrashPandaBot\TrashPandaBot.csproj", "{A7BF992C-7EB5-4B55-8161-46DBC4FCE03E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrashPandaBot", "TrashPandaBot\TrashPandaBot.csproj", "{A7BF992C-7EB5-4B55-8161-46DBC4FCE03E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SandboxConsole", "SandboxConsole\SandboxConsole.csproj", "{9B7E7285-0ABD-49C5-9F80-BC1417FA0BD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TriteUtilities", "TriteUtilities\TriteUtilities.csproj", "{2A58F224-4029-491D-86AF-019321FCAA9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{A7BF992C-7EB5-4B55-8161-46DBC4FCE03E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7BF992C-7EB5-4B55-8161-46DBC4FCE03E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7BF992C-7EB5-4B55-8161-46DBC4FCE03E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B7E7285-0ABD-49C5-9F80-BC1417FA0BD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B7E7285-0ABD-49C5-9F80-BC1417FA0BD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B7E7285-0ABD-49C5-9F80-BC1417FA0BD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B7E7285-0ABD-49C5-9F80-BC1417FA0BD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A58F224-4029-491D-86AF-019321FCAA9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A58F224-4029-491D-86AF-019321FCAA9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A58F224-4029-491D-86AF-019321FCAA9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A58F224-4029-491D-86AF-019321FCAA9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

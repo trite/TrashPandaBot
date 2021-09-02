@@ -1,6 +1,8 @@
 ﻿using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Threading.Tasks;
 
@@ -12,8 +14,20 @@ namespace TrashPandaBot
         private CommandService _commands;
         private CommandHandler _handler;
 
+        //static void Main(string[] args)
+        //    => new Program().MainAsync().GetAwaiter().GetResult();
+
         static void Main(string[] args)
-            => new Program().MainAsync().GetAwaiter().GetResult();
+        {
+            CreateHostBuilder(args).Build().Run();
+        }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureServices((context, services) =>
+                {
+                    
+                });
 
         public async Task MainAsync()
         {
@@ -36,6 +50,22 @@ namespace TrashPandaBot
             
 
             var token = Environment.GetEnvironmentVariable("TrashPandaBot", EnvironmentVariableTarget.Machine);
+            if (token is null)
+            {
+                token = Environment.GetEnvironmentVariable("TrashPandaBot", EnvironmentVariableTarget.User);
+                if (token is null)
+                {
+                    token = Environment.GetEnvironmentVariable("TrashPandaBot", EnvironmentVariableTarget.Process);
+                    if (token is null)
+                    {
+                        token = Environment.GetEnvironmentVariable("TrashPandaBot");
+                        if (token is null)
+                        {
+                            throw new Exception("Are you freaking kidding me?!");
+                        }
+                    }
+                }
+            }
             // var token = "Need to store this.";
 
 

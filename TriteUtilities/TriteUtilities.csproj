@@ -1,19 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Azure.Storage.Blobs" Version="12.9.1" />
-    <PackageReference Include="Discord.Net" Version="2.4.0" />
     <PackageReference Include="LanguageExt.Core" Version="3.4.15" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TriteUtilities\TriteUtilities.csproj" />
+    <Folder Include="Options\Azure\" />
+    <Folder Include="Services\Azure\" />
   </ItemGroup>
 
 </Project>
