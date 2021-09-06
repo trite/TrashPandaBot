@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\TriteUtilities\TriteUtilities\TriteUtilities.csproj" />
     <ProjectReference Include="..\TrashPandaBot\TrashPandaBot.csproj" />
   </ItemGroup>
 

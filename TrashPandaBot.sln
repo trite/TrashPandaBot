@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrashPandaBot", "TrashPanda
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SandboxConsole", "SandboxConsole\SandboxConsole.csproj", "{9B7E7285-0ABD-49C5-9F80-BC1417FA0BD5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TriteUtilities", "..\TriteUtilities\TriteUtilities\TriteUtilities.csproj", "{7D227B9A-71CC-4013-BA8C-5A1968CF4268}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{9B7E7285-0ABD-49C5-9F80-BC1417FA0BD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B7E7285-0ABD-49C5-9F80-BC1417FA0BD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B7E7285-0ABD-49C5-9F80-BC1417FA0BD5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7D227B9A-71CC-4013-BA8C-5A1968CF4268}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7D227B9A-71CC-4013-BA8C-5A1968CF4268}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7D227B9A-71CC-4013-BA8C-5A1968CF4268}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7D227B9A-71CC-4013-BA8C-5A1968CF4268}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
