@@ -1,28 +1,45 @@
-﻿using Discord.Commands;
+﻿using LanguageExt;
+using static LanguageExt.Prelude;
+using Discord.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TriteUtilities.Azure.Blob;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TrashPandaBot
 {
-    public class InfoModule : ModuleBase<SocketCommandContext>
+    public class ChirpModule : ModuleBase<SocketCommandContext>
     {
-        public static int ChirpCount = 504;
+        private int _chirpCount;
+
+        public ChirpModule()
+        {
+            string chirpCountStr = BlobStorageService.ReadBlob("TrashPandaConn", "main", "tideChirpCounter")
+                .IfNone(() => { throw new Exception("Unable to retrieve chirp counter. Fix this later, just throw for now."); });
+            _chirpCount = int.Parse(chirpCountStr);
+        }
 
         [Command("say")]
         [Summary("Echoes a message.")]
         public Task SayAsync([Remainder][Summary("The text to echo")] string echo)
             => ReplyAsync(echo);
 
+        [Command("ping")]
+        [Summary("Replies to a ping.")]
+        public Task PingAsync()
+            => ReplyAsync("pong");
+
         [Command("chirp")]
         [Summary("Increments the Tide Chirp Counter™.")]
-        [Alias("chrip")]
+        [Alias("chrip", "wtfmox")]
         public Task ChirpAsync()
         {
-            ChirpCount++;
-            return ReplyAsync($"Tide Chirp Counter™: {ChirpCount}");
+            _chirpCount++;
+            BlobStorageService.WriteBlob("TrashPandaConn", "main", "tideChirpCounter", _chirpCount.ToString());
+            return ReplyAsync($"Tide Chirp Counter™: {_chirpCount}");
         }
     }
 }

@@ -9,23 +9,31 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using TriteUtilities.Azure.Blob;
 
 namespace TrashPandaBot
 {
-    public class Worker : BackgroundService
+    public class Worker : CriticalBackgroundService
     {
         private readonly ILogger<Worker> _logger;
+
+        private readonly BlobStorageService _storageService;
 
         private DiscordSocketClient _client;
         private CommandService _commands;
         private CommandHandler _handler;
 
-        public Worker(ILogger<Worker> logger)
+        public Worker(ILogger<Worker> logger,
+                      BlobStorageService storageService,
+                      IHostApplicationLifetime lifetime,
+                      ILogger<CriticalBackgroundService> baseLogger)
+            :base(lifetime, baseLogger)
         {
             _logger = logger;
+            _storageService = storageService;
         }
 
-        protected override async Task ExecuteAsync(CancellationToken cancellationToken)
+        public override async Task DoWork(CancellationToken cancellationToken)
         {
             while (!cancellationToken.IsCancellationRequested)
             {
@@ -46,27 +54,13 @@ namespace TrashPandaBot
                 _handler = new CommandHandler(_client, _commands);
                 await _handler.InstallCommandsAsync();
 
-
-                var token = Environment.GetEnvironmentVariable("TrashPandaBot", EnvironmentVariableTarget.Machine);
-                if (token is null)
-                {
-                    token = Environment.GetEnvironmentVariable("TrashPandaBot", EnvironmentVariableTarget.User);
-                    if (token is null)
+                string token = BlobStorageService.ReadBlob("TrashPandaConn", "main", "trashPandaProdToken")
+                    .IfNone(() =>
                     {
-                        token = Environment.GetEnvironmentVariable("TrashPandaBot", EnvironmentVariableTarget.Process);
-                        if (token is null)
-                        {
-                            token = Environment.GetEnvironmentVariable("TrashPandaBot");
-                            if (token is null)
-                            {
-                                throw new Exception("Are you freaking kidding me?!");
-                            }
-                        }
-                    }
-                }
-                // var token = "Need to store this.";
-
-
+                        string msg = "Failed to retrieve discord bot token, exiting.";
+                        _logger.LogCritical(msg);
+                        throw new Exception(msg);
+                    });
 
                 await _client.LoginAsync(TokenType.Bot, token);
                 await _client.StartAsync();

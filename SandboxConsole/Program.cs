@@ -1,9 +1,11 @@
 ﻿using Azure.Storage;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
+using Microsoft.Extensions.Options;
 using System;
 using System.IO;
 using System.Text;
+using TriteUtilities.Azure.Blob;
 
 namespace SandboxConsole
 {
@@ -11,25 +13,52 @@ namespace SandboxConsole
     {
         static void Main(string[] args)
         {
-            var connString = Environment.GetEnvironmentVariable("TrashPandaConn", EnvironmentVariableTarget.Machine);
+            var service = new BlobStorageService(null, Options.Create(new BlobStorageOptions()
+            {
+                ConnStringNames = new() { "TrashPandaConn" }
+            }));
 
-            BlobServiceClient serviceClient = new(connString);
+            var test = BlobStorageService.ReadBlob("TrashPandaConn", "calendar", "events_2021-09");
 
-            BlobContainerClient containerClient = serviceClient.GetBlobContainerClient("main");
 
-            // BlobContainerClient containerClient = serviceClient.CreateBlobContainer("main"); // create
 
-            BlobClient client = containerClient.GetBlobClient("tideChirpCounter");
+            //var y = x.ReadBlob("TrashPandaConn", "main", "tideChirpCounter");
 
-            int count = int.Parse(client.DownloadContent().Value.Content.ToString());
-            Console.WriteLine($"Count before modifying: {count}");
+            //Console.WriteLine(y.IfNone("Failed to get the counter!"));
 
-            count++;
-            // client.put
-            // client.Upload(BinaryData.FromString(count.ToString()));
-            client.Upload(BinaryData.FromString(count.ToString()), new BlobUploadOptions());
-            // client.Upload("", new BlobUploadOptions() {  });
-            Console.WriteLine($"Count after modifying: {count}");
+            //y = ((int.Parse(y)) + 1).ToString();
+
+            //x.WriteBlob("TrashPandaConn", "main", "tideChirpCounter", y);
+
+            //y = x.ReadBlob("TrashPandaConn", "main", "tideChirpCounter");
+
+            //Console.WriteLine(y.IfNone("Failed to get the counter!"));
+
+
+
+
+
+
+
+            //var connString = Environment.GetEnvironmentVariable("TrashPandaConn", EnvironmentVariableTarget.Machine);
+
+            //BlobServiceClient serviceClient = new(connString);
+
+            //BlobContainerClient containerClient = serviceClient.GetBlobContainerClient("main");
+
+            //// BlobContainerClient containerClient = serviceClient.CreateBlobContainer("main"); // create
+
+            //BlobClient client = containerClient.GetBlobClient("tideChirpCounter");
+
+            //int count = int.Parse(client.DownloadContent().Value.Content.ToString());
+            //Console.WriteLine($"Count before modifying: {count}");
+
+            //count++;
+            //// client.put
+            //// client.Upload(BinaryData.FromString(count.ToString()));
+            //client.Upload(BinaryData.FromString(count.ToString()), new BlobUploadOptions());
+            //// client.Upload("", new BlobUploadOptions() {  });
+            //Console.WriteLine($"Count after modifying: {count}");
 
             //Console.WriteLine(downloaded.Value.Content.ToString());
 
